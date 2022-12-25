@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+<form method="post" action="/ekonomi">
+    <div class="form-group">
+        <h5 class="sr-only" for="fb">Algoritmanızı seçiniz</h5>
+    </div>
+    <select class="form-control" id="rating" name="operator">
+        <option value="1">Pytextrank</option>
+        <option value="2">LexRank</option>
+        <option value="3">Luhn</option>
+
+    </select>
+    <div class="form-group">
+        <button class="btn btn-default" type="submit">Submit!</button>
+    </div>
+</form>
+{% for new in myNews %}
+{% if new !=None %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <h2><a class="article-title" target=”_blank” href={{ new.url }}>{{ new.header }}</a></h2>
+            <img src={{ new.imageUrl }}>
+            <small class="text-muted">{{ new.date }}</small>
+        </div>
+        <p class="article-content">{{ new.content }}</p>
+        <small class="text-muted">{{ new.value }}</small>
+
+    </div>
+</article>
+{% endif %}
+{% endfor %}
+{% endblock content %}

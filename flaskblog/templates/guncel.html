@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid" id="feedback">
+    <h4>Özetleme algoritmanızı seçiniz.</h4>
+
+</div>
+<form method="post" action="/guncel">
+    <div class="form-group">
+        <h5 class="sr-only" for="fb">Algoritmanızı seçiniz</h5>
+    </div>
+
+    <div class="d-flex">
+        <select class="form-control" id="rating" name="operator">
+            <option value="1">Pytextrank</option>
+            <option value="2">LexRank</option>
+            <option value="3">Luhn</option>
+
+        </select>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Haberi Göster</button>
+        </div>
+    </div>
+
+</form>
+{% for new in myNews %}
+{% if new !=None %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <h2 class="news-title"><a class="article-title" target=”_blank” href={{ new.url }}>{{ new.header }}</a></h2>
+            <img class="article-img" src={{ new.imageUrl }}>
+            <small class="text-muted">{{ new.date }}</small>
+        </div>
+        <p class="news-content">{{ new.content }}</p>
+        <small class="text-muted">{{ new.value }}</small>
+
+    </div>
+</article>
+{% endif %}
+{% endfor %}
+{% endblock content %}
